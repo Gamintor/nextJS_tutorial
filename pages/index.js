@@ -1,6 +1,7 @@
 import React from 'react';
 import path from 'path';
 import fs from 'fs/promises';
+import Link from 'next/link';
 
 function HomePage(props) {
 	const { products } = props;
@@ -8,7 +9,9 @@ function HomePage(props) {
 	return (
 		<ul>
 			{products.map(item => (
-				<li key={item.id}>{item.title}</li>
+				<li key={item.id}>
+					<Link href={`/${item.id}`}>{item.title}</Link>
+				</li>
 			))}
 		</ul>
 	);
@@ -23,6 +26,7 @@ export async function getStaticProps() {
 		props: {
 			products: data.products,
 		},
+		revalidate: 10,
 	};
 }
 
