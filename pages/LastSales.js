@@ -48,4 +48,14 @@ function LastSalesPage() {
 	);
 }
 
+export async function getStaticProps() {
+	const response = await fetch('https://nextjs-course-c155f-default-rtdb.firebaseio.com/sales.json');
+	const data = await response.json();
+	let salesArray = [];
+	for (let k in data) {
+		salesArray.push({ id: k, username: data[k].username, volume: data[k].volume });
+	}
+	return { props: { sales: salesArray }, revalidate: 10 };
+}
+
 export default LastSalesPage;
