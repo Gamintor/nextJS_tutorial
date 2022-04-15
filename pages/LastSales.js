@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
-function LastSalesPage() {
-	const [sales, setSales] = useState();
+function LastSalesPage(props) {
+	const [sales, setSales] = useState(props.sales);
 	// const [isLoading, setIsLoading] = useState(false);
 
 	const { data, error } = useSWR('https://nextjs-course-c155f-default-rtdb.firebaseio.com/sales.json', url => fetch(url).then(res => res.json()));
@@ -35,7 +35,7 @@ function LastSalesPage() {
 		return <p>Failed to load!</p>;
 	}
 
-	if (!data || !sales) {
+	if (!data && !sales) {
 		return <p>Loading...</p>;
 	}
 
