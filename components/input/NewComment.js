@@ -3,10 +3,10 @@ import classes from './NewComment.module.css';
 
 function NewComment(props) {
 	const [isInvalid, setIsInvalid] = useState(false);
-
 	const emailInputRef = useRef();
 	const nameInputRef = useRef();
 	const commentInputRef = useRef();
+	
 
 	function sendCommentHandler(event) {
 		event.preventDefault();
