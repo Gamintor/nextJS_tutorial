@@ -1,45 +1,24 @@
 import { Fragment } from 'react';
 import FeaturedPosts from '../components/home-page/featured-posts';
 import Hero from '../components/home-page/hero';
+import { getFeaturedPosts } from '../lib/posts-util';
 
-export const DUMMY_POSTS = [
-	{
-		title: 'Getting started with NextJS',
-		image: 'getting-started-nextjs.png',
-		excerpt: 'NextJS is a React framework for production. It comes with SSR and routing',
-		slug: 'getting-started-with-nextjs1',
-		date: '2022-02-10',
-	},
-	{
-		title: 'Getting started with NextJS',
-		image: 'getting-started-nextjs.png',
-		excerpt: 'NextJS is a React framework for production. It comes with SSR and routing',
-		slug: 'getting-started-with-nextjs2',
-		date: '2022-02-10',
-	},
-	{
-		title: 'Getting started with NextJS',
-		image: 'getting-started-nextjs.png',
-		excerpt: 'NextJS is a React framework for production. It comes with SSR and routing',
-		slug: 'getting-started-with-nextjs3',
-		date: '2022-02-10',
-	},
-	{
-		title: 'Getting started with NextJS',
-		image: 'getting-started-nextjs.png',
-		excerpt: 'NextJS is a React framework for production. It comes with SSR and routing',
-		slug: 'getting-started-with-nextjs4',
-		date: '2022-02-10',
-	},
-];
-
-function HomePage() {
+function HomePage(props) {
 	return (
 		<Fragment>
 			<Hero />
-			<FeaturedPosts posts={DUMMY_POSTS} />
+			<FeaturedPosts posts={props.posts} />
 		</Fragment>
 	);
+}
+
+export function getStaticProps() {
+	const featuredPosts = getFeaturedPosts();
+	return {
+		props: {
+			posts: featuredPosts,
+		},
+	};
 }
 
 export default HomePage;
